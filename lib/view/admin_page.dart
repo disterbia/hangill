@@ -331,6 +331,15 @@ class AdminPage extends GetView<MenuController> {
                   width: screenWidth / 2,
                   child: Quill.QuillToolbar.basic(
                     controller: _controller,
+                     fontSizeValues: {
+                       '10': '10',
+                       '20': '20',
+                       '30': '30',
+                       '40': '40',
+                       '50':'50',
+                       '60':'60',
+                       'Clear':'0'
+                     },
                     showAlignmentButtons: false,
                     showBackgroundColorButton: true,
                     showBoldButton: true,

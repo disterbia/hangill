@@ -34,6 +34,7 @@ class DetailPage extends GetView<ProductController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<bool> priceList = [];
   bool priceIsNumber = true;
+  bool isDeskTop=GetPlatform.isDesktop;
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.width);
@@ -128,7 +129,7 @@ class DetailPage extends GetView<ProductController> {
                     Row(
                       children: [
                         SizedBox(width: 20,),
-                        Text(p.product.value.name!,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                        Flexible(child: Text(p.product.value.name!,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)),
                       ],
                     ),
                     SizedBox(height: 10,),
@@ -182,18 +183,20 @@ class DetailPage extends GetView<ProductController> {
                               SizedBox(height: 10,),
                               Text(p.product.value.comment!,style: TextStyle(fontSize: 15),),
                               SizedBox(height: 40,),
-                              Container(
-                               // width: screenWidth / 1,
-                                height: screenHeight / 1.7,
-                                child: Quill.QuillEditor(
-                                  scrollController: ScrollController(),
-                                  scrollable: true,
-                                  focusNode: FocusNode(),
-                                  autoFocus: false,
-                                  expands: false,
-                                  padding: EdgeInsets.zero,
-                                  controller: _controller,
-                                  readOnly: true, // true for view only mode
+                              Flexible(
+                                child: Container(
+                                 // width: screenWidth / 1,
+                                  height: screenHeight / 1.7,
+                                  child: Quill.QuillEditor(
+                                    scrollController: ScrollController(),
+                                    scrollable: true,
+                                    focusNode: FocusNode(),
+                                    autoFocus: false,
+                                    expands: false,
+                                    padding: EdgeInsets.zero,
+                                    controller: _controller,
+                                    readOnly: true, // true for view only mode
+                                  ),
                                 ),
                               )
                             ],
@@ -202,6 +205,7 @@ class DetailPage extends GetView<ProductController> {
                       )
                     ],
                   ),
+                  Divider(),
                   SizedBox(height: 100,),
                   Container(
                       // height: screenWidth.value<=CustomScreenWidth().smallSize ?
@@ -212,8 +216,10 @@ class DetailPage extends GetView<ProductController> {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SelectableText(a.info.value.replaceAll('뷁', "\n"),style: TextStyle(color: Colors.white),),
-                            SelectableText("Copyright © www.dmonster.co.kr All rights reserved.Since 2022",style: TextStyle(color: Colors.white))
+                            SelectableText(a.info.value.replaceAll('뷁', "\n"),style:
+                            TextStyle(color: Colors.white,fontSize: !isDeskTop&&screenWidth <= CustomScreenWidth().smallSize?10:16),),
+                            SelectableText("Copyright © www.dmonster.co.kr All rights reserved.Since 2022",style:
+                            TextStyle(color: Colors.white,fontSize: !isDeskTop&&screenWidth <= CustomScreenWidth().smallSize?10:16))
                           ],
                         ),
                       )
@@ -233,7 +239,7 @@ class DetailPage extends GetView<ProductController> {
     return Container(
       child: GridView.builder(
         padding: const EdgeInsets.all(0),
-        //physics: NeverScrollableScrollPhysics(),
+        physics: screenWidth.value<=CustomScreenWidth().menuSize?NeverScrollableScrollPhysics():null,
         shrinkWrap: true,
         itemCount: p.product.value.imageUrls!.length,
         gridDelegate:
@@ -255,7 +261,7 @@ class DetailPage extends GetView<ProductController> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: imageProvider,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       // colorFilter:
                       // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                     ),

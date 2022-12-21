@@ -210,7 +210,7 @@ class HomePage extends GetView<ProductController> {
                                     ),
                                   ),
                                   //SizedBox(height: 10,),
-                                  ConstrainedBox(constraints: BoxConstraints.tightFor(height: !isDeskTop&&screenWidth <= CustomScreenWidth().smallSize?50:65),
+                                  ConstrainedBox(constraints: BoxConstraints.tightFor(height: !isDeskTop&&screenWidth <= CustomScreenWidth().smallSize?60:75),
                                     child: Container(
                                       child: Column(
                                       children: [
@@ -227,7 +227,7 @@ class HomePage extends GetView<ProductController> {
                                             .format(int.parse(
                                             p.products[index].price!))
                                             : p.products[index].price!,
-                                        style: TextStyle(color: Colors.orange, fontSize: !isDeskTop&&screenWidth <= CustomScreenWidth().smallSize?9:14),
+                                        style: TextStyle(color: Colors.grey, fontSize: !isDeskTop&&screenWidth <= CustomScreenWidth().smallSize?9:14),
                                       ),
                                     ],),),
                                   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
+import 'dart:html' as HTML;
 import 'package:hangil/components/custom_logo.dart';
 import 'package:hangil/util/custom_screen_width.dart';
 
@@ -49,7 +49,7 @@ class CustomHeader extends StatelessWidget {
             MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                  onTap: () => context.go("/"),
+                  onTap: () =>  HTML.window.location.href='http://pf.kakao.com/_qASxjxj',
                   child: Image.asset(
                     "assets/kakao.png",
                     height: !isDeskTop&&screenWidth<=CustomScreenWidth().smallSize?30:60,

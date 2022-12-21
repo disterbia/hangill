@@ -21,7 +21,8 @@ void main() async {
   );
   await GetStorage.init();
   setPathUrlStrategy(); //샵없애기
-  runApp(GetMaterialApp.router(theme: ThemeData(fontFamily: "MyFont"),
+  runApp(GetMaterialApp.router(
+    theme: ThemeData(fontFamily: "MyFont"),
     scrollBehavior: CustomScroll(),
     title: "Hangil",
     debugShowCheckedModeBanner: false,
