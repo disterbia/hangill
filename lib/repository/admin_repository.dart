@@ -12,6 +12,13 @@ Future<dynamic> findCompanyInfo() async {
   return info;
 }
 
+  Future<dynamic> findKakao() async {
+    QuerySnapshot querySnapshot = await _adminProvider.findKakao();
+    Map<String,dynamic>? json =  querySnapshot.docs[0].data() as Map<String,dynamic>;
+    String info = json['kakao'];
+    return info;
+  }
+
   Future<dynamic> findByPassword(String password) async {
     QuerySnapshot querySnapshot = await _adminProvider.findByPassword(password);
     if(querySnapshot.docs.isEmpty) {

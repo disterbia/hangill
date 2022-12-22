@@ -8,6 +8,9 @@ class AdminProvider{
   Future<QuerySnapshot> findCompanyInfo() =>
       _store.collection(_collection).get();
 
+  Future<QuerySnapshot> findKakao() =>
+      _store.collection(_collection).get();
+
   Future<QuerySnapshot> findByPassword(String password) =>
       _store.collection(_collection).where("password",isEqualTo: password).get();
 }

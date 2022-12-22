@@ -35,6 +35,7 @@ class DetailPage extends GetView<ProductController> {
   List<bool> priceList = [];
   bool priceIsNumber = true;
   bool isDeskTop=GetPlatform.isDesktop;
+
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size.width);
@@ -94,7 +95,7 @@ class DetailPage extends GetView<ProductController> {
                               )),
                         )),
                   ),
-                  CustomHeader(screenWidth.value, _scaffoldKey,  CreateButton.createButton( m.menus.length,m.menus, context)),
+                  CustomHeader(screenWidth.value, _scaffoldKey,  CreateButton.createButton( m.menus.length,m.menus, context),a.kakao.value),
                   GetStorage().read("id") ==
                       "fn34nfnv8avf9ni30an"
                       ? Row(
@@ -115,7 +116,7 @@ class DetailPage extends GetView<ProductController> {
                           child: Text("삭제")),
                     ],
                   )
-                      : Container(),
+                      :Container(),
                   screenWidth.value<=CustomScreenWidth().middleSize?Container():Container(
                       width: screenWidth.value,
                       child: Divider(height: 1,
@@ -128,25 +129,31 @@ class DetailPage extends GetView<ProductController> {
                       SizedBox(height: 20,),
                     Row(
                       children: [
-                        SizedBox(width: 20,),
-                        Flexible(child: Text(p.product.value.name!,style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),)),
+                        SizedBox(width: 15,),
+                        Flexible(child: Text(p.product.value.name!,style: TextStyle(fontSize:!isDeskTop&&screenWidth.value<=CustomScreenWidth().smallSize? 20:30,fontWeight: FontWeight.bold),)),
                       ],
                     ),
                     SizedBox(height: 10,),
                     Row(
                       children: [
-                        SizedBox(width: 25,),
+                        SizedBox(width: 20,),
                         Text(priceIsNumber ? NumberFormat("###,###,### 원").format(int.parse(
                             p.product.value.price!))
                             : p.product.value.price!,
                           style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
-                        ),
+                        ),Spacer(),
+                        GetPlatform.isIOS?GestureDetector(onTap: ()=>context.go("/home/$index"),
+                          child: Text("<- 뒤로가기",
+                            style: TextStyle(fontSize: 15, color: Colors.grey),
+                          ),
+                        ):Container()
                       ],
                     ),
                       SizedBox(height: 20,),
                       products(),
                       SizedBox(height: 20,),
-                      Text(p.product.value.comment!,style: TextStyle(fontSize: 15),),
+                      Text(p.product.value.comment!,style: TextStyle(fontSize: 15,color: Colors.grey),),
+                      Divider(),
                       SizedBox(height: 20,),
                       Container(
                          width: screenWidth.value ,
@@ -186,7 +193,7 @@ class DetailPage extends GetView<ProductController> {
                               Flexible(
                                 child: Container(
                                  // width: screenWidth / 1,
-                                  height: screenHeight / 1.7,
+                                  height: screenHeight.value,
                                   child: Quill.QuillEditor(
                                     scrollController: ScrollController(),
                                     scrollable: true,

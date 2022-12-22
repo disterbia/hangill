@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:html' as HTML;
 import 'package:hangil/components/custom_logo.dart';
+import 'package:hangil/controller/admin_controller.dart';
 import 'package:hangil/util/custom_screen_width.dart';
 
 class CustomHeader extends StatelessWidget {
-  CustomHeader(this.screenWidth,this.scaffoldKey,this.createButton);
+  CustomHeader(this.screenWidth,this.scaffoldKey,this.createButton,this.kakao);
   double screenWidth;
   GlobalKey<ScaffoldState> scaffoldKey;
   List<Widget> createButton;
   bool isDeskTop=GetPlatform.isDesktop;
+  String? kakao;
+
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
@@ -49,7 +52,7 @@ class CustomHeader extends StatelessWidget {
             MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                  onTap: () =>  HTML.window.location.href='http://pf.kakao.com/_qASxjxj',
+                  onTap: () =>  HTML.window.location.href=kakao!,
                   child: Image.asset(
                     "assets/kakao.png",
                     height: !isDeskTop&&screenWidth<=CustomScreenWidth().smallSize?30:60,

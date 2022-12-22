@@ -88,7 +88,7 @@ class HomePage extends GetView<ProductController> {
                                     )),
                               )),
                         ),
-                        CustomHeader(screenWidth.value, _scaffoldKey, CreateButton.createButton(m.menus.length, m.menus, context,selection: _selections)),
+                        CustomHeader(screenWidth.value, _scaffoldKey, CreateButton.createButton(m.menus.length, m.menus, context,selection: _selections),a.kakao.value),
                         screenWidth.value<=CustomScreenWidth().middleSize?Container():Container(
                             width: screenWidth.value,
                             child: Divider(
@@ -122,11 +122,11 @@ class HomePage extends GetView<ProductController> {
                               Column(
                                 children: [
                                   SizedBox(
-                                    height: 10,
+                                    height: !isDeskTop&&screenWidth <= CustomScreenWidth().smallSize?1:10,
                                   ),
                                   Text(
                                     "[${p.products.length}]",
-                                    style: TextStyle(color: Colors.grey),
+                                    style: TextStyle(color: Colors.grey,fontSize: !isDeskTop&&screenWidth <= CustomScreenWidth().smallSize?8:16),
                                   ),
                                 ],
                               )
@@ -169,7 +169,8 @@ class HomePage extends GetView<ProductController> {
                                           CustomScreenWidth().middleSize
                                       ? 3
                                       : 4,
-                              crossAxisSpacing: 10,
+                              crossAxisSpacing: screenWidth.value <=
+                                  CustomScreenWidth().smallSize?1:10,
                               mainAxisSpacing: 0,
                               childAspectRatio: screenWidth.value<=CustomScreenWidth().bigSize?0.7:0.8,
                             ),
