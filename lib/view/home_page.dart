@@ -98,18 +98,19 @@ class HomePage extends GetView<ProductController> {
                               left: screenWidth.value <=
                                       CustomScreenWidth().bigSize
                                   ? 10.0
-                                  : 10 + (screenWidth.value / 50),
+                                  : 10 + (screenWidth.value / 30),
                               right: screenWidth.value <=
                                       CustomScreenWidth().bigSize
                                   ? 10.0
-                                  : 10 + (screenWidth.value / 50),
+                                  : 10 + (screenWidth.value / 30),
                               bottom: 0,
                               top: 0),
                           child: Row(
                             children: [
-                              SizedBox(
-                                width: 10,
-                              ),
+                              // screenWidth.value<=CustomScreenWidth().smallSize?
+                              // SizedBox(
+                              //   width: 10,
+                              // ):Container(),
                               Text(
                                 m.menus[int.parse(param!)].name!,
                                 style: TextStyle(
@@ -150,11 +151,11 @@ class HomePage extends GetView<ProductController> {
                                 left: screenWidth.value <=
                                         CustomScreenWidth().bigSize
                                     ? 10.0
-                                    : 10 + (screenWidth.value / 20),
+                                    : 0 + (screenWidth.value / 20),
                                 right: screenWidth.value <=
                                         CustomScreenWidth().bigSize
                                     ? 10.0
-                                    : 10 + (screenWidth.value / 20),
+                                    : 0 + (screenWidth.value / 20),
                                 bottom: 10,
                                 top: 10),
                             physics: NeverScrollableScrollPhysics(),
